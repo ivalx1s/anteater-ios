@@ -1,0 +1,574 @@
+{
+  "configFiles": {
+  },
+  "configs": {
+    "Debug": "debug",
+        "Release": "release"
+    },
+  "name": "Anteater",
+  "options": {
+    "groupOrdering": [
+            {
+                "order": [
+                    "Anteater"
+                ]
+            }
+        ],
+        "groupSortPosition": "top",
+        "tabWidth": 4,
+        "indentWidth": 4,
+        "defaultConfig": "Debug"
+    },
+  "packages": {
+        "local-darwin-keychainaccess": {
+            "path": "../Packages/darwin-keychainaccess/"
+        },
+        "local-darwin-logger": {
+            "path": "../Packages/darwin-logger/"
+        },
+        "local-darwin-rerdux": {
+            "path": "../Packages/darwin-relux/"
+        },
+        "local-darwin-restclient": {
+            "path": "../Packages/darwin-restclient/"
+        },
+        "local-hapticshelper-ios": {
+            "path": "../Packages/hapticshelper-ios/"
+        },
+        "local-lottie-ios": {
+            "path": "../Packages/lottie-ios/"
+        },
+        "local-Pow": {
+            "path": "../Packages/Pow/"
+        },
+        "local-swift": {
+            "path": "../Packages/swift/"
+        },
+        "local-swift-argument-parser": {
+            "path": "../Packages/swift-argument-parser/"
+        },
+        "local-swift-collections": {
+            "path": "../Packages/swift-collections/"
+        },
+        "local-Swinject": {
+            "path": "../Packages/Swinject/"
+        },
+        "remote-darwin-keychainaccess": {
+            "version": "4.2.3",
+            "url": "git@github.com:ivalx1s/darwin-keychainaccess.git"
+        },
+        "remote-darwin-relux": {
+            "url": "git@github.com:ivalx1s/darwin-relux.git",
+            "version": "4.1.0"
+        },
+        "remote-darwin-restclient": {
+            "version": "0.4.0",
+            "url": "git@github.com:ivalx1s/darwin-restclient.git"
+        },
+        "remote-hapticshelper-ios": {
+            "version": "0.1.0",
+            "url": "git@github.com:ivalx1s/hapticshelper-ios.git"
+        },
+        "remote-lottie-ios": {
+            "version": "4.4.3",
+            "url": "git@github.com:airbnb/lottie-ios.git"
+        },
+        "remote-Pow": {
+            "version": "1.0.1",
+            "url": "git@github.com:EmergeTools/Pow.git"
+        },
+        "remote-swift-collections": {
+            "url": "https://github.com/apple/swift-collections.git",
+            "version": "1.1.1"
+        },
+        "remote-swift-stdlibplus": {
+            "version": "1.0.0",
+            "url": "git@github.com:ivalx1s/swift-stdlibplus.git"
+        },
+        "remote-Swinject": {
+            "version": "2.8.1",
+            "url": "https://github.com/Swinject/Swinject.git"
+        }
+    },
+  "schemes": {
+    "app-ios": {
+            "build": {
+                "targets": {
+                    "app-ios": "all"
+                }
+            },
+            "run": {
+                "debugEnabled": true,
+                "disableThreadPerformanceChecker": true,
+                "disableMainThreadChecker": false,
+                "config": "Debug",
+                "commandLineArguments": {
+                    "-OUTPUT_GRAPHQL_CURL_REQUEST": true,
+                    "-com.apple.CoreData.Logging.stderr 0": false,
+                    "-com.apple.CoreData.CloudKitDebug 0": false
+                }
+            },
+            "test": {
+                "config": "Release",
+                "commandLineArguments": {
+                },
+                "gatherCoverageData": true,
+                "targets": [
+                ]
+            },
+            "profile": {
+                "config": "Release"
+            },
+            "analyze": {
+                "config": "Debug"
+            },
+            "archive": {
+                "config": "Release",
+                "postActions": [
+                    {
+                        "script": "# Do all of the work in a subdirectory of /tmp, and use a\n# unique ID so that there's no collision with previous builds.\n\n#EXPORT_UUID=`uuidgen`\n#EXPORT_PATH=\"/tmp/$PRODUCT_NAME-$EXPORT_UUID/\"\n\n#mkdir -p \"$EXPORT_PATH\"\n\n# Xcode doesn't show run script errors in build log.\n#exec > \"$EXPORT_PATH/Xcode run script.log\" 2>&1\n\n# Use osascript(1) to present notification banners; otherwise\n# there's no progress indication until the script finishes.\n#/usr/bin/osascript -e 'display notification \"...\" with title \"Exporting application archive…\"'\n\n# Ask xcodebuild(1) to export the app. Use the export options\n# from a previous manual export that used a Developer ID.\n#/usr/bin/xcodebuild -exportArchive -archivePath \"$ARCHIVE_PATH\" -exportOptionsPlist \"$SRCROOT/exportOptionsDev.plist\" -exportPath \"$EXPORT_PATH\"\n\n# Open the folder that was created, which also signals completion.\n#open \"$EXPORT_PATH\"",
+                        "name": "export_ipa",
+                        "settingsTarget": "app-ios"
+                    }
+                ],
+                "revealArchiveInOrganizer": true,
+                "customArchiveName": "Anteater-iOS"
+            },
+            "management": {
+                "shared": true,
+                "orderHint": 1,
+                "isShown": true
+            }
+        },
+        "appex-share": {
+            "build": {
+                "targets": {
+                    "app-ios": "all",
+                    "appex-share": "all"
+                }
+            },
+            "run": {
+                "disableThreadPerformanceChecker": true,
+                "disableMainThreadChecker": false,
+                "config": "Debug",
+                "commandLineArguments": {
+                    "-com.apple.CoreData.Logging.stderr 0": true,
+                    "-com.apple.CoreData.CloudKitDebug 0": true
+                }
+            },
+            "test": {
+                "config": "Release",
+                "gatherCoverageData": true,
+                "targets": [
+                ]
+            },
+            "profile": {
+                "config": "Release"
+            },
+            "analyze": {
+                "config": "Release"
+            },
+            "archive": {
+                "config": "Release",
+                "revealArchiveInOrganizer": true
+            }
+        },
+        "appex-notification-service": {
+            "build": {
+                "targets": {
+                    "app-ios": "all",
+                    "appex-notification-service": "all"
+                }
+            },
+            "run": {
+                "disableThreadPerformanceChecker": true,
+                "disableMainThreadChecker": false,
+                "config": "Debug",
+                "commandLineArguments": {
+                    "-com.apple.CoreData.Logging.stderr 0": true,
+                    "-com.apple.CoreData.CloudKitDebug 0": true
+                }
+            },
+            "test": {
+                "config": "Release",
+                "gatherCoverageData": true,
+                "targets": [
+                ]
+            },
+            "profile": {
+                "config": "Release"
+            },
+            "analyze": {
+                "config": "Release"
+            },
+            "archive": {
+                "config": "Release",
+                "revealArchiveInOrganizer": true
+            }
+        },
+        "appex-widget": {
+            "build": {
+                "targets": {
+                    "app-ios": "all",
+                    "appex-notification-service": "all"
+                }
+            },
+            "run": {
+                "disableThreadPerformanceChecker": true,
+                "disableMainThreadChecker": false,
+                "config": "Debug",
+                "commandLineArguments": {
+                    "-com.apple.CoreData.Logging.stderr 0": true,
+                    "-com.apple.CoreData.CloudKitDebug 0": true
+                }
+            },
+            "test": {
+                "config": "Release",
+                "gatherCoverageData": true,
+                "targets": [
+                ]
+            },
+            "profile": {
+                "config": "Release"
+            },
+            "analyze": {
+                "config": "Release"
+            },
+            "archive": {
+                "config": "Release",
+                "revealArchiveInOrganizer": true
+            }
+        }
+    },
+    "settingGroups": {
+    "compilerSettingsDebug": {
+            "ENABLE_BITCODE": "NO",
+            "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
+            "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
+            "SWIFT_COMPILATION_MODE": "incremental",
+            "GCC_OPTIMIZATION_LEVEL": "0",
+            "OTHER_SWIFT_FLAGS": "",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS": "$(inherited) Debug"
+        },
+        "compilerSettingsRelease": {
+            "SWIFT_OPTIMIZATION_LEVEL": "-Osize",
+            "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
+            "SWIFT_COMPILATION_MODE": "wholemodule",
+            "GCC_OPTIMIZATION_LEVEL": "Os",
+            "OTHER_SWIFT_FLAGS": "",
+            "SWIFT_ACTIVE_COMPILATION_CONDITIONS": ""
+        },
+        "compilerSettings": {
+            "configs": {
+                "debug": {
+                    "groups": [
+                        "compilerSettingsDebug"
+                    ]
+                },
+                "release": {
+                    "groups": [
+                        "compilerSettingsRelease"
+                    ]
+                }
+            }
+        },
+        "linkerSettings": {
+            "OTHER_LDFLAGS": "-lstdc++ -ObjC"
+        },
+        "cxxSettings": {
+            "CLANG_CXX_LANGUAGE_STANDARD": "c++17"
+        },
+        "localizationSettings": {
+            "SWIFT_EMIT_LOC_STRINGS": "YES",
+            "CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED": "YES"
+        },
+        "versioningSettings": {
+            "MARKETING_VERSION": "1.0.0",
+            "CURRENT_PROJECT_VERSION": "240701.1"
+        },
+        "baseSettings": {
+            "SKIP_INSTALL": "NO"
+        }
+    },
+  "settings": {
+  "base": {
+            "PROJECT_BUNDLE_ID_BASE": "com.eatml.anteater",
+            "HOST_BUNDLE_IDENTIFIER_SUFFIX": "app-ios",
+            "GENERATE_INFOPLIST_FILE": "YES",
+            "OWNER_NAME": "Eatml Ltd.",
+            "CODE_SIGN_STYLE": "Automatic",
+            "DEVELOPMENT_TEAM": "V8V53456PB"
+        }
+    },
+  "targets": {
+    "app-ios": {
+            "entitlements": {
+                "path": "app-ios/Configs/Anteater.entitlements",
+                "properties": {
+                    "com.apple.security.application-groups": [
+                        "group.Anteater.shared",
+                        "group.Anteater.app"
+                    ]
+                }
+            },
+            "info": {
+                "path": "app-ios/Configs/Info.plist",
+                "properties": {
+                    "NSUserTrackingUsageDescription": "Our app uses your data to provide personalized recommendations.",
+                    "NSCameraUsageDescription": "Camera is used to provide you with essential funcationality.",
+                    "NSPhotoLibraryUsageDescription": "Analyze meals captured by other apps.",
+                    "NSMicrophoneUsageDescription": "Provide voice input functionality.",
+                    "UIApplicationSceneManifest": {
+                        "UIApplicationSupportsMultipleScenes": false,
+                        "UISceneConfigurations": {
+                        }
+                    },
+                    "BundleBaseDisplayName": "$(PRODUCT_NAME_BASE)",
+                    "DTPlatformName": "iphoneos",
+                    "DTPlatformVersion": "17.0",
+                    "ITSAppUsesNonExemptEncryption": "NO",
+                    "LSRequiresIPhoneOS": "YES",
+                    "DTSDKName": "iphoneos17.0",
+                    "CFBundlePackageType": "$(PRODUCT_BUNDLE_PACKAGE_TYPE)",
+                    "CFBundleDevelopmentRegion": "$(DEVELOPMENT_LANGUAGE)",
+                    "CFBundleInfoDictionaryVersion": "6.0",
+                    "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
+                    "CFBundleDisplayName": "$(CFBundleDisplayName)",
+                    "CFBundleURLTypes": [
+                    ],
+                    "UISupportedInterfaceOrientations": [
+                        "UIInterfaceOrientationPortrait"
+                    ],
+                    "NSLocationWhenInUseUsageDescription": "Associate your captured meals, menus and other data with geographic location."
+                }
+            },
+            "dependencies": [
+                {
+                    "target": "appex-share"
+                },
+                {
+                    "target": "appex-notification-service"
+                },
+                {
+                    "target": "appex-widget"
+                },
+                {
+                    "package": "remote-hapticshelper-ios",
+                    "product": "HapticsHelper"
+                },
+                {
+                    "package": "remote-Pow",
+                    "product": "Pow"
+                },
+                {
+                    "package": "remote-lottie-ios",
+                    "product": "Lottie"
+                },
+                {
+                    "package": "remote-darwin-restclient",
+                    "product": "RestClient"
+                },
+                {
+                    "package": "remote-darwin-keychainaccess",
+                    "product": "KeychainAccess"
+                },
+                {
+                    "package": "remote-darwin-relux",
+                    "product": "Relux"
+                },
+                {
+                    "package": "remote-Swinject",
+                    "product": "Swinject"
+                },
+                {
+                    "package": "remote-swift-collections",
+                    "product": "Collections"
+                }
+            ],
+            "type": "application",
+            "platform": "iOS",
+            "deploymentTarget": "17.0",
+            "sources": [
+                {
+                    "type": "file",
+                    "path": "app-ios/config/PrivacyInfo.xcprivacy"
+                },
+                "app-ios/sources"
+            ],
+            "settings": {
+                "base": {
+                    "PRODUCT_MODULE_NAME": "$(PRODUCT_NAME_BASE)",
+                    "PRODUCT_DISPLAY_NAME": "Anteater",
+                    "PRODUCT_NAME_BASE": "Anteater",
+                    "PRODUCT_NAME": "$(PRODUCT_NAME_BASE)",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX)",
+                    "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
+                    "CODE_SIGN_ENTITLEMENTS": "${PROJECT_DIR}/app-ios/config/Anteater.entitlements",
+                    "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
+                    "CODE_SIGN_IDENTITY": "Apple Development",
+                    "TARGETED_DEVICE_FAMILY": "1"
+                },
+                "configs": {
+                    "Debug": {
+                    },
+                    "Release": {
+                    }
+                },
+                "groups": [
+                    "compilerSettings",
+                    "linkerSettings",
+                    "localizationSettings",
+                    "versioningSettings",
+                    "baseSettings"
+                ]
+            }
+        },
+        "appex-share": {
+            "dependencies": [
+            ],
+            "info": {
+                "path": "appex-share/AppexShare/Configs/Info.plist",
+                "properties": {
+                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
+                    "CFBundleDisplayName": "$(CFBundleDisplayName)",
+                    "NSExtension": {
+                        "NSExtensionActionWantsFullScreenPresentation": true,
+                        "NSExtensionAttributes": {
+                            "NSExtensionActivationRule": {
+                                "NSExtensionActivationSupportsMovieWithMaxCount": 1,
+                                "NSExtensionActivationSupportsWebURLWithMaxCount": 1
+                            }
+                        },
+                        "NSExtensionPrincipalClass": "ShareViewController",
+                        "NSExtensionPointIdentifier": "com.apple.share-services"
+                    }
+                }
+            },
+            "type": "app-extension",
+            "platform": "iOS",
+            "sources": [
+                "appex-share/AppexShare"
+            ],
+            "deploymentTarget": "17.0",
+            "settings": {
+                "base": {
+                    "PRODUCT_DISPLAY_NAME": "Anteater",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).appex-share",
+                    "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
+                    "CFBundleDisplayName": "$(PRODUCT_DISPLAY_NAME)",
+                    "CODE_SIGN_IDENTITY": "Apple Development",
+                    "TARGETED_DEVICE_FAMILY": "1"
+                },
+                "configs": {
+                    "Debug": {
+                    },
+                    "Release": {
+                    }
+                },
+                "groups": [
+                    "compilerSettings",
+                    "linkerSettings",
+                    "localizationSettings",
+                    "versioningSettings",
+                    "baseSettings"
+                ]
+            }
+        },
+        "appex-notification-service": {
+            "dependencies": [
+            ],
+            "info": {
+                "path": "appex-notification-service/AppexNotificationService/Configs/Info.plist",
+                "properties": {
+                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
+                    "CFBundleDisplayName": "$(CFBundleDisplayName)",
+                    "NSExtension": {
+                        "NSExtensionPointIdentifier": "com.apple.usernotifications.service",
+                        "NSExtensionPrincipalClass": "$(PRODUCT_MODULE_NAME).NotificationService"
+                    }
+                }
+            },
+            "type": "app-extension",
+            "platform": "iOS",
+            "sources": [
+                "appex-notification-service/AppexNotificationService"
+            ],
+            "deploymentTarget": "17.0",
+            "settings": {
+                "base": {
+                    "PRODUCT_DISPLAY_NAME": "Anteater",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).appex-notification-service",
+                    "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
+                    "CFBundleDisplayName": "$(PRODUCT_DISPLAY_NAME)",
+                    "CODE_SIGN_IDENTITY": "Apple Development",
+                    "TARGETED_DEVICE_FAMILY": "1"
+                },
+                "configs": {
+                    "Debug": {
+                    },
+                    "Release": {
+                    }
+                },
+                "groups": [
+                    "compilerSettings",
+                    "linkerSettings",
+                    "localizationSettings",
+                    "versioningSettings",
+                    "baseSettings"
+                ]
+            }
+        },
+        "appex-widget": {
+            "type": "app-extension",
+            "subtype": "widget-extension",
+            "sources": [
+                "appex-widget/AppexWidget",
+                "appex-widget/AppexWidget/Assets/Assets.xcassets"
+            ],
+            "settings": {
+                "base": {
+                    "PARENT_APP_BUNDLE_IDENTIFIER_SUFFIX": "app-ios",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).appex-widget",
+                    "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
+                    "DEVELOPMENT_ASSET_PATHS": "appex-widget/AppexWidget/Assets/Assets.xcassets",
+                    "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
+                    "CODE_SIGN_IDENTITY": "Apple Development",
+                    "TARGETED_DEVICE_FAMILY": "1"
+                },
+                "Configss": {
+                    "Release": {
+                    },
+                    "Debug": {
+                    }
+                },
+                "groups": [
+                    "versioningSettings",
+                    "compilerSettings",
+                    "linkerSettings",
+                    "localizationSettings",
+                    "baseSettings"
+                ]
+            },
+            "platform": "iOS",
+            "info": {
+                "path": "appex-widget/AppexWidget/Configs/Info.plist",
+                "properties": {
+                    "NSExtension": {
+                        "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
+                    },
+                    "CFBundlePackageType": "$(PRODUCT_BUNDLE_PACKAGE_TYPE)",
+                    "CFBundleName": "$(PRODUCT_NAME)",
+                    "CFBundleDisplayName": "Widget",
+                    "CFBundleInfoDictionaryVersion": "6.0",
+                    "CFBundleDevelopmentRegion": "$(DEVELOPMENT_LANGUAGE)",
+                    "CFBundleShortVersionString": "$(MARKETING_VERSION)",
+                    "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)"
+                }
+            },
+            "deploymentTarget": "17.0",
+            "dependencies": [
+            ]
+        }
+    }
+}
