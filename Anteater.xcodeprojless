@@ -303,7 +303,7 @@
   "targets": {
     "app-ios": {
             "entitlements": {
-                "path": "app-ios/Configs/Anteater.entitlements",
+                "path": "app-ios/AppAnteater/Configs/Anteater.entitlements",
                 "properties": {
                     "com.apple.security.application-groups": [
                         "group.Anteater.shared",
@@ -312,7 +312,7 @@
                 }
             },
             "info": {
-                "path": "app-ios/Configs/Info.plist",
+                "path": "app-ios/AppAnteater/Configs/Info.plist",
                 "properties": {
                     "NSUserTrackingUsageDescription": "Our app uses your data to provide personalized recommendations.",
                     "NSCameraUsageDescription": "Camera is used to provide you with essential funcationality.",
@@ -390,11 +390,7 @@
             "platform": "iOS",
             "deploymentTarget": "17.0",
             "sources": [
-                {
-                    "type": "file",
-                    "path": "app-ios/config/PrivacyInfo.xcprivacy"
-                },
-                "app-ios/sources"
+                "app-ios/AppAnteater"
             ],
             "settings": {
                 "base": {
@@ -404,7 +400,8 @@
                     "PRODUCT_NAME": "$(PRODUCT_NAME_BASE)",
                     "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX)",
                     "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
-                    "CODE_SIGN_ENTITLEMENTS": "${PROJECT_DIR}/app-ios/config/Anteater.entitlements",
+                    "CODE_SIGN_ENTITLEMENTS": "${PROJECT_DIR}/app-ios/AppAnteater/Configs/Anteater.entitlements",
+                    "DEVELOPMENT_ASSET_PATHS": "${PROJECT_DIR}/app-ios/AppAnteater/Assets/Assets.xcassets",
                     "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
                     "CODE_SIGN_IDENTITY": "Apple Development",
                     "TARGETED_DEVICE_FAMILY": "1"
