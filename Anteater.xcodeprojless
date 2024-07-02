@@ -20,6 +20,12 @@
         "defaultConfig": "Debug"
     },
   "packages": {
+        "local-swift-stdlibplus": {
+            "path": "../Packages/swift-stdlibplus/"
+        },
+        "local-swift-numerics": {
+            "path": "../Packages/swift-numerics/"
+        },
         "local-darwin-keychainaccess": {
             "path": "../Packages/darwin-keychainaccess/"
         },
@@ -43,6 +49,9 @@
         },
         "local-swift": {
             "path": "../Packages/swift/"
+        },
+        "local-swift-algorithms": {
+            "path": "../Packages/swift-algorithms/"
         },
         "local-swift-argument-parser": {
             "path": "../Packages/swift-argument-parser/"
@@ -76,6 +85,10 @@
         "remote-Pow": {
             "version": "1.0.1",
             "url": "git@github.com:EmergeTools/Pow.git"
+        },
+        "remote-swift-algorithms": {
+            "version": "1.2.0",
+            "url": "git@github.com:apple/swift-algorithms.git"
         },
         "remote-swift-collections": {
             "url": "https://github.com/apple/swift-collections.git",
@@ -344,6 +357,10 @@
                 }
             },
             "dependencies": [
+                {
+                    "package": "remote-swift-stdlibplus",
+                    "product": "SwiftPlus"
+                },
                 {
                     "target": "appex-share"
                 },
