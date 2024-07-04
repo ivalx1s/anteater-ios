@@ -1,0 +1,186 @@
+#!/bin/zsh
+
+# https://github.com/ivalx1s/xcgen/
+# MIT License
+
+# Copyright (c) 2023 Ivan Oaprin
+
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+
+# The above copyright notice and this permission notice shall be included in all
+# copies or substantial portions of the Software.
+
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+#
+#
+# XCGEN – Automated Bootstrapping for XcodeGen-based Xcode Workflow
+#
+#
+#
+# This shell script streamlines the setup and maintenance of Xcode projects
+# that leverage XcodeGen and the Swift Package Manager (SPM). It executes a
+# series of tasks, including:
+#
+# * Dependency Verification: Checks and ensures that critical system
+#   dependencies—Homebrew, XcodeGen, and Mint—are installed correctly.
+# * Xcode Project Generation: Utilizes XcodeGen to generate an Xcode project file
+#   from the project specification.
+# * Xcode Project Launch: Automatically opens the generated Xcode project.
+#
+# The script uses two subcommands, 'bootstrap' and 'fetch', to control its execution.
+#
+# This script encapsulates critical setup and maintenance tasks for XcodeGen-based
+# Xcode projects with SPM, significantly simplifying the iOS development workflow.
+#
+# Usage:
+#
+# - Place this shell script in the project root directory alongside the XcodeGen manifest.
+# - Fine-tune for your use case, e.g., GraphQL or SwiftGen related parts
+# - Ensure the script is executable with 'chmod +x .xcgen'.
+# - Add 'alias xcgen='./.xcgen'' to your '.zshrc' profile.
+# - Run 'xcgen bootstrap'.
+# - After pulling new code from the repository, regenerate the Xcode project using the 'xcgen' command.
+#
+# The 'bootstrap' subcommand is geared towards preparing the development environment.
+# It installs necessary tools, with a focus on Mint, which is then used for installing
+# and managing XcodeGen and other scripts crucial to the project generation pipeline.
+#
+# In this setup, we utilize the following scripts (should be defined in the Mintfile):
+#
+# * xcodegen: Generates the Xcode project file from the project specification (in JSON format).
+# * xcgbootstrap: Fetches Swift packages as defined in the XcodeGen project specification.
+#
+# The 'fetch' subcommand updates the repositories of dependencies. This command should be
+# used when the XcodeGen project specification is updated with new version tags.
+#
+# The 'cleanspm', 'cleanxc', 'cleandd', 'cleanall' subcommands can be used to wipe all
+# the Xcode and SPM related caches.
+#
+# Ensure packages are proxied by local paths in your XcodeGen manifest, for example:
+#
+# packages:
+#   local-swift-collections:
+#     path: "../anteater-ios-packages/swift-collections/"
+#   remote-swift-collections:
+#     url: https://github.com/apple/swift-collections.git
+#     version: 1.0.2
+#
+# The xcgbootstrap script automatically creates the '-packages' folder in the parent directory
+# of your project directory. This setup allows Xcode to accommodate local changes in packages,
+# track these changes in its GUI, and launch much faster. As a result, the overall developer
+# experience is significantly enhanced compared to when remote packages are used and cache is managed by Xcode.
+
+
+set -e
+set -o pipefail
+
+trap 'echo "An error occurred. Exiting."; exit 1' ERR
+
+PROJECT_NAME="Anteater"
+PROJECT_DIR=$PWD
+
+
+# Check if homebrew is installed
+if ! command -v brew &> /dev/null
+then
+	echo "Homebrew is not installed on your system. It is required to bootstrap the project"
+	echo "Install Homebrew first and try again"
+	echo "Visit https://brew.sh or use this command:"
+	echo "/bin/bash -c \"$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)\""
+	exit 1
+fi
+
+export PATH="/opt/homebrew/bin:$PATH"
+
+# Check if realpath is available
+if ! command -v realpath &> /dev/null
+then
+    echo "'realpath' command is not available on your system. It is required for resolving symlinks"
+    echo "Install 'coreutils' via Homebrew first and try again"
+    echo "Use this command:"
+    echo "brew install coreutils"
+    exit 1
+fi
+
+# Check if mint is installed
+if ! command -v mint &> /dev/null
+then
+	# Install mint using homebrew
+	brew install mint
+fi
+export PATH="$HOME/.mint/bin:$PATH"
+
+
+# : <<'END'
+
+# Check if 'bootstrap' subcommand is passed
+if [[ $1 == "bootstrap" ]]; then
+    rm -rf ~/.mint/
+    # Run mint bootstrap
+    mint bootstrap --link
+    xcgbootstrap submodules $PROJECT_NAME.xcodeprojless
+fi
+
+
+# Check for the existence of 'Packages' directory in the parent directory
+if [[ ! -d "../Packages" ]]; then
+    # If 'Packages' directory does not exist, run xcgbootstrap
+    xcgbootstrap submodules $PROJECT_NAME.xcodeprojless
+fi
+
+# Check if 'fetch' subcommand is passed
+if [[ $1 == "fetch" ]]; then
+    # xcgbootstrap submodules $PROJECT_NAME.xcodeprojless
+    echo "⚙️ Cloning dependencies..."
+    xcgbootstrap submodules $PROJECT_NAME.xcodeprojless
+fi
+
+if [[ $1 == "cleanall" ]]; then
+    echo "⚙️ Cleaning Xcode, SPM and Xcodegen caches..."
+    rm -rf ~/Library/org.swift.swiftpm
+	rm -rf ~/Library/Caches/org.swift.swiftpm
+	rm -rf ~/Library/Developer/Xcode/DerivedData
+	rm -rf ~/.xcodegen/cache/
+    rm -rf ~/Library/Caches/com.apple.dt.Xcode
+	echo "✅ Done"
+fi
+
+if [[ $1 == "cleandd" ]]; then
+    echo "⚙️ Cleaning Xcode caches..."
+	rm -rf ~/Library/Developer/Xcode/DerivedData
+	echo "✅ Done"
+fi
+
+if [[ $1 == "cleanxc" ]]; then
+    echo "⚙️ Cleaning Xcode caches..."
+        rm -rf ~/Library/Developer/Xcode/DerivedData
+        rm -rf ~/Library/Caches/com.apple.dt.Xcode
+        echo "✅ Done"
+fi
+
+if [[ $1 == "cleanspm" ]]; then
+    echo "⚙️ Cleaning SPM caches..."
+	rm -rf ~/Library/org.swift.swiftpm
+	rm -rf ~/Library/Caches/org.swift.swiftpm
+	echo "✅ Done"
+fi
+
+
+
+xcodegen generate --spec $PROJECT_NAME.xcodeprojless
+echo "🕐 $(date '+%Y-%m-%d %H:%M:%S')"
+open $PROJECT_NAME.xcodeproj
+
+
+# END
