@@ -17,6 +17,7 @@
         "groupSortPosition": "top",
         "tabWidth": 4,
         "indentWidth": 4,
+        "createIntermediateGroups": true,
         "defaultConfig": "Debug"
     },
   "packages": {
@@ -153,11 +154,11 @@
                 "isShown": true
             }
         },
-        "appex-share": {
+        "app-ios-share-extension": {
             "build": {
                 "targets": {
                     "app-ios": "all",
-                    "appex-share": "all"
+                    "app-ios-share-extension": "all"
                 }
             },
             "run": {
@@ -190,7 +191,7 @@
             "build": {
                 "targets": {
                     "app-ios": "all",
-                    "appex-notification-service": "all"
+                    "app-ios-notification-service": "all"
                 }
             },
             "run": {
@@ -219,11 +220,11 @@
                 "revealArchiveInOrganizer": true
             }
         },
-        "appex-widget": {
+        "app-ios-widgets": {
             "build": {
                 "targets": {
                     "app-ios": "all",
-                    "appex-notification-service": "all"
+                    "app-ios-notification-service": "all"
                 }
             },
             "run": {
@@ -316,16 +317,16 @@
   "targets": {
     "app-ios": {
             "entitlements": {
-                "path": "app-ios/AppAnteater/Configs/Anteater.entitlements",
+                "path": "Anteater-iOS/App/Configs/Anteater.entitlements",
                 "properties": {
                     "com.apple.security.application-groups": [
-                        "group.Anteater.shared",
-                        "group.Anteater.app"
+                        "group.$(PROJECT_BUNDLE_ID_BASE).$(HOST_BUNDLE_IDENTIFIER_SUFFIX).shared",
+                        "group.$(PROJECT_BUNDLE_ID_BASE).$(HOST_BUNDLE_IDENTIFIER_SUFFIX).local"
                     ]
                 }
             },
             "info": {
-                "path": "app-ios/AppAnteater/Configs/Info.plist",
+                "path": "Anteater-iOS/App/Configs/Info.plist",
                 "properties": {
                     "NSUserTrackingUsageDescription": "Our app uses your data to provide personalized recommendations.",
                     "NSCameraUsageDescription": "Camera is used to provide you with essential funcationality.",
@@ -362,13 +363,13 @@
                     "product": "SwiftPlus"
                 },
                 {
-                    "target": "appex-share"
+                    "target": "app-ios-share-extension"
                 },
                 {
-                    "target": "appex-notification-service"
+                    "target": "app-ios-notification-service"
                 },
                 {
-                    "target": "appex-widget"
+                    "target": "app-ios-widgets"
                 },
                 {
                     "package": "remote-hapticshelper-ios",
@@ -407,7 +408,7 @@
             "platform": "iOS",
             "deploymentTarget": "17.0",
             "sources": [
-                "app-ios/AppAnteater"
+                "Anteater-iOS/App"
             ],
             "settings": {
                 "base": {
@@ -417,8 +418,8 @@
                     "PRODUCT_NAME": "$(PRODUCT_NAME_BASE)",
                     "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX)",
                     "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
-                    "CODE_SIGN_ENTITLEMENTS": "${PROJECT_DIR}/app-ios/AppAnteater/Configs/Anteater.entitlements",
-                    "DEVELOPMENT_ASSET_PATHS": "${PROJECT_DIR}/app-ios/AppAnteater/Assets/Assets.xcassets",
+                    "CODE_SIGN_ENTITLEMENTS": "${PROJECT_DIR}/Anteater-iOS/App/Configs/Anteater.entitlements",
+                    "DEVELOPMENT_ASSET_PATHS": "${PROJECT_DIR}/Anteater-iOS/App/Assets/Assets.xcassets",
                     "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
                     "CODE_SIGN_IDENTITY": "Apple Development",
                     "TARGETED_DEVICE_FAMILY": "1"
@@ -438,11 +439,11 @@
                 ]
             }
         },
-        "appex-share": {
+        "app-ios-share-extension": {
             "dependencies": [
             ],
             "info": {
-                "path": "appex-share/AppexShare/Configs/Info.plist",
+                "path": "Anteater-iOS/App Extensions/Share Extension/Configs/Info.plist",
                 "properties": {
                     "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
                     "CFBundleDisplayName": "$(CFBundleDisplayName)",
@@ -462,13 +463,13 @@
             "type": "app-extension",
             "platform": "iOS",
             "sources": [
-                "appex-share/AppexShare"
+                "Anteater-iOS/App Extensions/Share Extension"
             ],
             "deploymentTarget": "17.0",
             "settings": {
                 "base": {
                     "PRODUCT_DISPLAY_NAME": "Anteater",
-                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).appex-share",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).share-extension",
                     "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
                     "CFBundleDisplayName": "$(PRODUCT_DISPLAY_NAME)",
                     "CODE_SIGN_IDENTITY": "Apple Development",
@@ -489,11 +490,11 @@
                 ]
             }
         },
-        "appex-notification-service": {
+        "app-ios-notification-service": {
             "dependencies": [
             ],
             "info": {
-                "path": "appex-notification-service/AppexNotificationService/Configs/Info.plist",
+                "path": "Anteater-iOS/App Extensions/Notification Service/Configs/Info.plist",
                 "properties": {
                     "CFBundleVersion": "$(CURRENT_PROJECT_VERSION)",
                     "CFBundleDisplayName": "$(CFBundleDisplayName)",
@@ -506,13 +507,13 @@
             "type": "app-extension",
             "platform": "iOS",
             "sources": [
-                "appex-notification-service/AppexNotificationService"
+                "Anteater-iOS/App Extensions/Notification Service"
             ],
             "deploymentTarget": "17.0",
             "settings": {
                 "base": {
                     "PRODUCT_DISPLAY_NAME": "Anteater",
-                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).appex-notification-service",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).notification-service",
                     "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
                     "CFBundleDisplayName": "$(PRODUCT_DISPLAY_NAME)",
                     "CODE_SIGN_IDENTITY": "Apple Development",
@@ -533,19 +534,19 @@
                 ]
             }
         },
-        "appex-widget": {
+        "app-ios-widgets": {
             "type": "app-extension",
             "subtype": "widget-extension",
             "sources": [
-                "appex-widget/AppexWidget",
-                "appex-widget/AppexWidget/Assets/Assets.xcassets"
+                "Anteater-iOS/App Extensions/Widgets",
+                "Anteater-iOS/App Extensions/Widgets/Assets/Assets.xcassets"
             ],
             "settings": {
                 "base": {
                     "PARENT_APP_BUNDLE_IDENTIFIER_SUFFIX": "app-ios",
-                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).appex-widget",
+                    "TARGET_BUNDLE_IDENTIFIER_SUFFIX": "$(HOST_BUNDLE_IDENTIFIER_SUFFIX).widgets",
                     "PRODUCT_BUNDLE_IDENTIFIER": "$(PROJECT_BUNDLE_ID_BASE).$(TARGET_BUNDLE_IDENTIFIER_SUFFIX)",
-                    "DEVELOPMENT_ASSET_PATHS": "appex-widget/AppexWidget/Assets/Assets.xcassets",
+                    "DEVELOPMENT_ASSET_PATHS": "Anteater-iOS/App\\ Extensions/Widgets/Assets/Assets.xcassets",
                     "HEADER_SEARCH_PATHS": "\"$(TARGET_TEMP_DIR)/../$(PROJECT_NAME).build/DerivedSources\"",
                     "CODE_SIGN_IDENTITY": "Apple Development",
                     "TARGETED_DEVICE_FAMILY": "1"
@@ -566,7 +567,7 @@
             },
             "platform": "iOS",
             "info": {
-                "path": "appex-widget/AppexWidget/Configs/Info.plist",
+                "path": "Anteater-iOS/App Extensions/Widgets/Configs/Info.plist",
                 "properties": {
                     "NSExtension": {
                         "NSExtensionPointIdentifier": "com.apple.widgetkit-extension"
