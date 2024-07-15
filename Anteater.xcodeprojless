@@ -7,7 +7,8 @@
     },
   "name": "Anteater",
   "options": {
-    "groupOrdering": [
+    "xcodeVersion": "16.0",
+        "groupOrdering": [
             {
                 "order": [
                     "Anteater"
@@ -23,6 +24,12 @@
   "packages": {
         "local-swift-stdlibplus": {
             "path": "../Packages/swift-stdlibplus/"
+        },
+        "local-swift-darwin-connectionmonitor": {
+            "path": "../Packages/darwin-connectionmonitor/"
+        },
+        "local-swift-ios-featuremanagement": {
+            "path": "../Packages/ios-featuremanagement/"
         },
         "local-swift-numerics": {
             "path": "../Packages/swift-numerics/"
@@ -63,13 +70,16 @@
         "local-Swinject": {
             "path": "../Packages/Swinject/"
         },
+        "local-darwin-foundationplus": {
+            "path": "../Packages/darwin-foundationplus/"
+        },
         "remote-darwin-keychainaccess": {
             "version": "4.2.3",
             "url": "git@github.com:ivalx1s/darwin-keychainaccess.git"
         },
         "remote-darwin-relux": {
             "url": "git@github.com:ivalx1s/darwin-relux.git",
-            "version": "4.1.0"
+            "version": "6.0.0"
         },
         "remote-darwin-restclient": {
             "version": "0.4.0",
@@ -100,8 +110,20 @@
             "url": "git@github.com:ivalx1s/swift-stdlibplus.git"
         },
         "remote-Swinject": {
-            "version": "2.8.1",
+            "version": "2.9.1",
             "url": "https://github.com/Swinject/Swinject.git"
+        },
+        "remote-darwin-foundationplus": {
+            "version": "2.0.0",
+            "url": "git@github.com:ivalx1s/darwin-foundationplus.git"
+        },
+        "remote-ios-featuremanagement": {
+            "version": "3.0.0",
+            "url": "git@github.com:ivalx1s/ios-featuremanagement.git"
+        },
+        "remote-darwin-connectionmonitor": {
+            "version": "0.1.0",
+            "url": "git@github.com:ivalx1s/darwin-connectionmonitor.git"
         }
     },
   "schemes": {
@@ -255,7 +277,10 @@
         }
     },
     "settingGroups": {
-    "compilerSettingsDebug": {
+    "swiftSix": {
+            "SWIFT_VERSION": "6.0"
+        },
+        "compilerSettingsDebug": {
             "ENABLE_BITCODE": "NO",
             "SWIFT_OPTIMIZATION_LEVEL": "-Onone",
             "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
@@ -276,12 +301,14 @@
             "configs": {
                 "debug": {
                     "groups": [
-                        "compilerSettingsDebug"
+                        "compilerSettingsDebug",
+                        "swiftSix"
                     ]
                 },
                 "release": {
                     "groups": [
-                        "compilerSettingsRelease"
+                        "compilerSettingsRelease",
+                        "swiftSix"
                     ]
                 }
             }
@@ -359,8 +386,20 @@
             },
             "dependencies": [
                 {
+                    "package": "remote-darwin-connectionmonitor",
+                    "product": "ConnectionMonitor"
+                },
+                {
+                    "package": "remote-ios-featuremanagement",
+                    "product": "FeatureManagementModule"
+                },
+                {
                     "package": "remote-swift-stdlibplus",
                     "product": "SwiftPlus"
+                },
+                {
+                    "package": "remote-darwin-foundationplus",
+                    "product": "FoundationPlus"
                 },
                 {
                     "target": "app-ios-share-extension"

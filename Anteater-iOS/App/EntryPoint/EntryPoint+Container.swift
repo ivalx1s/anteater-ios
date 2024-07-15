@@ -1,4 +1,7 @@
 import SwiftUI
+import FeatureManagementModule
+import ConnectionMonitor
+import Relux
 
 enum EntryPoint {}
 
@@ -6,6 +9,7 @@ extension EntryPoint {
 	struct ContentContainer: View {
 		var body: some View {
 			ContentView()
+				.bindEnabledFeatures()
 		}
 	}
 }
@@ -20,7 +24,6 @@ extension EntryPoint {
 					.foregroundStyle(.tint)
 				Text("Hello, world!")
 			}
-			.padding()
 		}
 	}
 }
