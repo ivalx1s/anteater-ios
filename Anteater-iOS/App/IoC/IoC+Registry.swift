@@ -1,20 +1,20 @@
 import Swinject
 
 extension IoC {
-	@MainActor
-	enum Registry {
-		private static var registeredTypes: [any Module.Type] = []
+	actor Registry {
+		private static var registeredModules: [any Module.Type] = []
 		
-		static func registerType(_ type: any Module.Type) {
-			registeredTypes.append(type)
+		static func registerModule(_ type: any Module.Type) {
+			registeredModules.append(type)
 		}
 		
+		@MainActor
 		static var build: Container {
 			let container = Container()
-			for type in registeredTypes {
-				type.register(in: container)
+			for module in registeredModules {
+				module.register(in: container)
 			}
-			registeredTypes = []
+			registeredModules = []
 			return container
 		}
 	}
@@ -22,6 +22,8 @@ extension IoC {
 
 extension IoC.Registry {
 	protocol Module {
-		@MainActor static func register(in container: Container)
+		
+		@MainActor
+		static func register(in container: Container)
 	}
 }

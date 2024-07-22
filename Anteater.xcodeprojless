@@ -22,8 +22,17 @@
         "defaultConfig": "Debug"
     },
   "packages": {
+        "local-swift-swift-docc-plugin": {
+            "path": "../Packages/swift-docc-plugin/"
+        },
+        "local-swift-docc-symbolkit": {
+            "path": "../Packages/swift-docc-symbolkit/"
+        },
         "local-swift-stdlibplus": {
             "path": "../Packages/swift-stdlibplus/"
+        },
+        "local-swift-async-algorithms": {
+            "path": "../Packages/swift-async-algorithms/"
         },
         "local-swift-darwin-connectionmonitor": {
             "path": "../Packages/darwin-connectionmonitor/"
@@ -67,11 +76,14 @@
         "local-swift-collections": {
             "path": "../Packages/swift-collections/"
         },
-        "local-Swinject": {
-            "path": "../Packages/Swinject/"
+        "local-swift-swinject": {
+            "path": "../Packages/swift-swinject/"
         },
         "local-darwin-foundationplus": {
             "path": "../Packages/darwin-foundationplus/"
+        },
+        "local-swiftui-reluxrouter": {
+            "path": "../Packages/swiftui-reluxrouter/"
         },
         "remote-darwin-keychainaccess": {
             "version": "4.2.3",
@@ -79,7 +91,11 @@
         },
         "remote-darwin-relux": {
             "url": "git@github.com:ivalx1s/darwin-relux.git",
-            "version": "6.0.0"
+            "version": "7.0.0"
+        },
+        "remote-swiftui-reluxrouter": {
+            "url": "git@github.com:ivalx1s/swiftui-reluxrouter.git",
+            "version": "2.0.0"
         },
         "remote-darwin-restclient": {
             "version": "0.4.0",
@@ -109,9 +125,9 @@
             "version": "1.0.0",
             "url": "git@github.com:ivalx1s/swift-stdlibplus.git"
         },
-        "remote-Swinject": {
-            "version": "2.9.1",
-            "url": "https://github.com/Swinject/Swinject.git"
+        "remote-swift-swinject": {
+            "version": "3.0.0",
+            "url": "https://github.com/eatml/swift-swinject.git"
         },
         "remote-darwin-foundationplus": {
             "version": "2.0.0",
@@ -124,6 +140,10 @@
         "remote-darwin-connectionmonitor": {
             "version": "0.1.0",
             "url": "git@github.com:ivalx1s/darwin-connectionmonitor.git"
+        },
+        "remote-swift-async-algorithms": {
+            "version": "1.0.0",
+            "url": "git@github.com:apple/swift-async-algorithms.git"
         }
     },
   "schemes": {
@@ -278,7 +298,8 @@
     },
     "settingGroups": {
     "swiftSix": {
-            "SWIFT_VERSION": "6.0"
+            "SWIFT_VERSION": "6.0",
+            "SWIFT_UPCOMING_FEATURE_EXISTENTIAL_ANY": "YES"
         },
         "compilerSettingsDebug": {
             "ENABLE_BITCODE": "NO",
@@ -381,10 +402,22 @@
                     "UISupportedInterfaceOrientations": [
                         "UIInterfaceOrientationPortrait"
                     ],
+                    "UILaunchScreen": {
+                        "UIColorName": "Background",
+                        "UIImageName": "logo"
+                    },
                     "NSLocationWhenInUseUsageDescription": "Associate your captured meals, menus and other data with geographic location."
                 }
             },
             "dependencies": [
+                {
+                    "package": "remote-swiftui-reluxrouter",
+                    "product": "ReluxRouter"
+                },
+                {
+                    "package": "remote-swift-async-algorithms",
+                    "product": "AsyncAlgorithms"
+                },
                 {
                     "package": "remote-darwin-connectionmonitor",
                     "product": "ConnectionMonitor"
@@ -435,7 +468,7 @@
                     "product": "Relux"
                 },
                 {
-                    "package": "remote-Swinject",
+                    "package": "remote-swift-swinject",
                     "product": "Swinject"
                 },
                 {

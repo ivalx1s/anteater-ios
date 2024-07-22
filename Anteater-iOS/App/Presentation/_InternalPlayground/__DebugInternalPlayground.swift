@@ -6,7 +6,7 @@ import Relux
 
 struct __DebugInternalPlayground: View {
 	
-	@EnvironmentObject private var features: FeatureManagement.UI.ViewState
+//	@EnvironmentObject private var features: FeatureManagement.UI.ViewState
 	@Environment(ConnectionMonitor.UI.State.self) private var connectionMonitor
 	
 	var body: some View {
@@ -15,7 +15,7 @@ struct __DebugInternalPlayground: View {
 				.imageScale(.large)
 				.foregroundStyle(.tint)
 			Text("Hello, world!")
-				.presentIf(.exactFeature(.debugMenu))
+//				.presentIf(.exactFeature(.debugMenu))
 			
 			Button(action: {
 				Task {
@@ -26,9 +26,9 @@ struct __DebugInternalPlayground: View {
 					}
 				}
 			}) {
-				ForEach(features.enabledFeatures, id: \.self) { enabledFeature in
-					Text("\(enabledFeature)")
-				}
+//				ForEach(features.enabledFeatures, id: \.self) { enabledFeature in
+//					Text("\(enabledFeature)")
+//				}
 			}
 			
 			Text(connectionMonitor.connected.description)
