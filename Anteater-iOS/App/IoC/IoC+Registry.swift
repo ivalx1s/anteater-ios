@@ -4,8 +4,10 @@ extension IoC {
 	actor Registry {
 		private static var registeredModules: [any Module.Type] = []
 		
-		static func registerModule(_ type: any Module.Type) {
-			registeredModules.append(type)
+		@MainActor
+		static func registerModules(_ modules: [any Module.Type]) {
+			registeredModules.append(contentsOf: modules)
+			IoC.initialize(with: IoC.Registry.build)
 		}
 		
 		@MainActor
@@ -14,7 +16,6 @@ extension IoC {
 			for module in registeredModules {
 				module.register(in: container)
 			}
-			registeredModules = []
 			return container
 		}
 	}

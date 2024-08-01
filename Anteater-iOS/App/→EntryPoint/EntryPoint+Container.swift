@@ -8,13 +8,6 @@ enum EntryPoint {}
 
 extension EntryPoint {
 	struct ContentContainer: View {
-		
-		@StateObject private var appState: AppReluxContainer
-		
-		init(appState: AppReluxContainer) {
-			self._appState = StateObject(wrappedValue: appState)
-		}
-		
 		var body: some View {
 			ContentView()
 		}
@@ -41,44 +34,6 @@ extension EntryPoint {
 	}
 }
 
-
-enum UI {
-	
-}
-
-extension UI {
-	enum Dashboard {
-		
-	}
-}
-
-
-extension UI {
-	enum Profile {
-		
-	}
-}
-
-extension UI.Dashboard {
-	
-	struct Container: View {
-		
-		@Environment(ConnectionMonitor.UI.State.self) private var connectionMonitor
-		@EnvironmentObject private var features: FeatureManagement.UI.ViewState
-		@EnvironmentObject private var dashboardRouter: Relux.Navigation.Router<UI.Dashboard.Navigation.Page>
-		
-		var body: some View {
-			UI.Dashboard.RootPage(
-				connectionState: connectionMonitor.connected,
-				allFeatures: features.allFeatures,
-				enabledFeatures: features.enabledFeatures,
-				navigationPath: $dashboardRouter.path
-			)
-		}
-		
-	}
-}
-
 extension UI.Dashboard {
 	struct RootPage: View {
 		
@@ -86,10 +41,10 @@ extension UI.Dashboard {
 		let allFeatures: [FeatureManagement.Business.Model.Feature]
 		let enabledFeatures: [FeatureManagement.Business.Model.Feature.Key]
 		
-		@Binding var navigationPath: NavigationPath
+		@Binding var router: NavigationPath
 		
 		var body: some View {
-			NavigationStack(path: $navigationPath) {
+			NavigationStack(path: $router) {
 				VStack {
 					Text("Dashboard root page")
 						.font(.largeTitle)
@@ -109,7 +64,7 @@ extension UI.Dashboard {
 					Button(action: {
 						Task {
 							await action {
-								Relux.Navigation.Router.Action.push(page: UI.Dashboard.Navigation.Page.info)
+								Relux.Navigation.ProjectingRouter.Action.push(page: UI.Dashboard.Navigation.Page.info)
 							}
 						}
 					}) {
@@ -119,7 +74,7 @@ extension UI.Dashboard {
 					Button(action: {
 						Task {
 							await action {
-								Relux.Navigation.Router.Action.push(page: UI.Dashboard.Navigation.Page.details)
+								Relux.Navigation.ProjectingRouter.Action.push(page: UI.Dashboard.Navigation.Page.details)
 							}
 						}
 					}) {
@@ -127,37 +82,18 @@ extension UI.Dashboard {
 					}
 					Spacer()
 				}
-					.navigationDestination(for: UI.Dashboard.Navigation.Page.self, destination: Route)
+					.navigationDestination(for: UI.Dashboard.Navigation.Page.self, destination: route)
 			}
 		}
 		
 		@ViewBuilder
-		private func Route(forPage page: UI.Dashboard.Navigation.Page) -> some View {
+		private func route(forPage page: UI.Dashboard.Navigation.Page) -> some View {
 			switch page {
 				case .details:
 					Text("UI.Dashboard.Details.Page")
 				case .info:
 					Text("UI.Dashboard.Info.Page")
-					
 			}
-		}
-		
-	}
-}
-
-extension UI.Profile {
-	
-	struct Container: View {
-		
-		@Environment(ConnectionMonitor.UI.State.self) private var connectionMonitor
-		@EnvironmentObject private var features: FeatureManagement.UI.ViewState
-		
-		var body: some View {
-			UI.Profile.RootPage(
-				connectionState: connectionMonitor.connected,
-				allFeatures: features.allFeatures,
-				enabledFeatures: features.enabledFeatures
-			)
 		}
 		
 	}

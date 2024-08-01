@@ -1,10 +1,8 @@
 import Relux
 
-extension UI.Dashboard {
-	enum Navigation {
-		
-	}
-}
+// namespace
+extension UI.Dashboard { enum Navigation {} }
+extension UI.Profile { enum Navigation { } }
 
 extension UI.Dashboard.Navigation {
 	enum Page: Relux.Navigation.PathComponent {
@@ -12,13 +10,6 @@ extension UI.Dashboard.Navigation {
 		case details
 	}
 }
-
-extension UI.Profile {
-	enum Navigation {
-		
-	}
-}
-
 
 extension UI.Profile.Navigation {
 	enum Page: Relux.Navigation.PathComponent {

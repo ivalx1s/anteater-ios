@@ -5,8 +5,11 @@ import ConnectionMonitor
 
 
 extension ConnectionMonitor.UI {
-	@Observable @MainActor
-	final class State: ReluxViewStateObserving, @unchecked Sendable {
+	@Observable
+	@MainActor
+	final class State: Relux.Presentation.StatePresenting, Sendable {
+		let __fullTypeName: String = "ConnectionMonitor.UI.State"
+		
 		private var pipelines: Set<AnyCancellable> = []
 
 		var connected: Bool = false
@@ -15,11 +18,11 @@ extension ConnectionMonitor.UI {
 			connectionMonitorBusinessState: ConnectionMonitor.Business.State
 		) {
 			Task {
-				await connect2(connectionMonitorBusinessState: connectionMonitorBusinessState)
+				await connect(connectionMonitorBusinessState: connectionMonitorBusinessState)
 			}
 		}
 		
-		private func connect2(connectionMonitorBusinessState: ConnectionMonitor.Business.State) async {
+		private func connect(connectionMonitorBusinessState: ConnectionMonitor.Business.State) async {
 			await connectionMonitorBusinessState.$status
 				.receive(on: DispatchQueue.main)
 				.weakSink(self) { (self, status) in

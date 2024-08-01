@@ -13,11 +13,10 @@ extension ConnectionMonitor: IoC.Registry.Module {
 				sagas: [IoC.get(type: (any ConnectionMonitor.Saga).self)!],
 				serviceFacade: IoC.get(type: (any ConnectionMonitor.ServiceFacade).self)!,
 				networkService: IoC.get(type: (any ConnectionMonitor.NetworkMonitoring).self)!,
-				states: [IoC.get(type: (ConnectionMonitor.Business.State).self)!],
-				viewStates: [
-					
+				states: [
+					IoC.get(type: (ConnectionMonitor.Business.State).self)!
 				],
-				viewStateObservables: [
+				uistates: [
 					resolver.resolve(ConnectionMonitor.UI.State.self)!
 				]
 			)
