@@ -1,8 +1,7 @@
 import SwiftUI
-import FeatureManagementModule
+import ReluxFeatureManagement
 import ConnectionMonitor
 import Relux
-import ReluxRouter
 
 enum EntryPoint {}
 

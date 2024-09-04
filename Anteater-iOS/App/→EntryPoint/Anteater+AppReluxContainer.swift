@@ -1,6 +1,6 @@
 import SwiftUI
 import Relux
-import FeatureManagementModule
+import ReluxFeatureManagement
 import ConnectionMonitor
 
 @MainActor

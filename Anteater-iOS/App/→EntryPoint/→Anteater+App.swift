@@ -2,10 +2,12 @@ import SwiftUI
 import SwiftPlus
 import FoundationPlus
 import Relux
-import FeatureManagementModule
+import ReluxFeatureManagement
 import ConnectionMonitor
 import ReluxRouter
 import Logger
+
+@_exported import SwiftUIRelux
 
 
 @main @MainActor
@@ -68,49 +70,5 @@ extension [any Relux.Module] {
 			IoC.get(type: (FeatureManagement.Module).self)!,
 			IoC.get(type: (ConnectionMonitor.Module).self)!
 		]
-	}
-}
-
-
-extension View {
-	@MainActor
-	func passingObservableToEnvironment(fromStore store: Relux.Store) -> some View {
-		var view: any View = self
-		
-		let routers = store
-			.routers
-			.values
-			.map {
-				$0 as Any
-			}
-		
-		let uistates = store
-			.uistates
-			.values
-			.map {
-				$0 as Any
-			}
-		
-		passToEnvironment(inView: &view, objects: routers + uistates)
-		
-		return AnyView(view)
-	}
-	
-	
-	@MainActor
-	func passToEnvironment(inView view: inout any View, objects: [Any]) {
-		for object in objects {
-			if let observableObj = object as? (any ObservableObject) {
-				debugPrint("[ReluxRootView] passing \(observableObj) as ObservableObject to SwiftUI environment")
-				view = view.environmentObject(observableObj)
-			}
-			
-			if #available(iOS 17, *) {
-				if let observable = object as? (any Observable & AnyObject) {
-					debugPrint("[ReluxRootView] passing \(observable) as Observable to SwiftUI environment")
-					view = view.environment(observable)
-				}
-			}
-		}
 	}
 }

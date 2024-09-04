@@ -1,6 +1,6 @@
 import Foundation
 import Combine
-import FeatureManagementModule
+import ReluxFeatureManagement
 
 extension FeatureManagement.UI.ViewState {
 	var anteaterFeatures: AnyPublisher<[FeatureManagement.Business.Model.AnteaterFeature], Never> {

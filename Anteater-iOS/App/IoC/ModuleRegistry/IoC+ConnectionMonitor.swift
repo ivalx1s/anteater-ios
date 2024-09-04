@@ -1,7 +1,7 @@
 import Swinject
 import ConnectionMonitor
 import Observation
-import FeatureManagementModule
+import ReluxFeatureManagement
 
 extension ConnectionMonitor: IoC.Registry.Module {
 	

@@ -1,6 +1,6 @@
 import SwiftUI
 import ConnectionMonitor
-import FeatureManagementModule
+import ReluxFeatureManagement
 import Relux
 
 extension UI.Dashboard {

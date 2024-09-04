@@ -1,5 +1,5 @@
 import Foundation
-import FeatureManagementModule
+import ReluxFeatureManagement
 
 extension FeatureManagement.Business.Model {
 	enum AnteaterFeature: FeatureManagement.Business.Model.Feature.Key, Sendable {

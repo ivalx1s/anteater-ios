@@ -1,6 +1,6 @@
 import SwiftUI
 import Foundation
-import FeatureManagementModule
+import ReluxFeatureManagement
 import ConnectionMonitor
 import Relux
 

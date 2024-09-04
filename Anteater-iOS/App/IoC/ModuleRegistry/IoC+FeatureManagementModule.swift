@@ -1,11 +1,5 @@
-import FeatureManagementModule
+import ReluxFeatureManagement
 import Swinject
-
-extension FeatureManagement.UI.ViewState {
-	public var __fullTypeName: String {
-		"FeatureManagement.UI.ViewState"
-	}
-}
 
 extension FeatureManagement: IoC.Registry.Module {
 	
