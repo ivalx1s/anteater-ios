@@ -6,6 +6,7 @@ import ReluxFeatureManagement
 import ConnectionMonitor
 import ReluxRouter
 import Logger
+import ReluxAnalytics
 
 @_exported import SwiftUIRelux
 
@@ -46,6 +47,7 @@ extension Anteater {
 				Relux.self,
 				FeatureManagement.self,
 				ConnectionMonitor.self,
+                Analytics.self,
 			]
 		)
 	}
@@ -68,7 +70,8 @@ extension [any Relux.Module] {
 	static var resolvedModules: Self {
 		return [
 			IoC.get(type: (FeatureManagement.Module).self)!,
-			IoC.get(type: (ConnectionMonitor.Module).self)!
+			IoC.get(type: (ConnectionMonitor.Module).self)!,
+            IoC.get(type: (Analytics.Module).self)!
 		]
 	}
 }
