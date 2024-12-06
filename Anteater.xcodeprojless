@@ -22,47 +22,26 @@
         "defaultConfig": "Debug"
     },
   "packages": {
-        "local-Amplitude-iOS": {
-            "path": "../Packages/dawrin-amplitude/"
+        "local-AccessibilitySnapshot": {
+            "path": "../Packages/AccessibilitySnapshot/"
         },
-        "local-analytics-connector-ios": {
-            "path": "../Packages/darwin-amplitude-ac/"
+        "local-SnapshotPreviews-iOS": {
+            "path": "../Packages/SnapshotPreviews-iOS/"
         },
-        "local-relux-analytics-amplitude": {
-            "path": "../Packages/relux-analytics-amplitude/"
+        "local-FlyingFox": {
+            "path": "../Packages/FlyingFox/"
         },
-        "local-relux-analytics": {
-            "path": "../Packages/relux-analytics/"
-        },
-        "local-swiftui-relux": {
-            "path": "../Packages/swiftui-relux/"
-        },
-        "local-swift-swift-docc-plugin": {
-            "path": "../Packages/swift-docc-plugin/"
-        },
-        "local-swift-docc-symbolkit": {
-            "path": "../Packages/swift-docc-symbolkit/"
-        },
-        "local-swift-stdlibplus": {
-            "path": "../Packages/swift-stdlibplus/"
-        },
-        "local-swift-async-algorithms": {
-            "path": "../Packages/swift-async-algorithms/"
-        },
-        "local-relux-connectionmonitor": {
-            "path": "../Packages/relux-connectionmonitor/"
-        },
-        "local-swift-ios-featuremanagement": {
-            "path": "../Packages/ios-featuremanagement/"
-        },
-        "local-swift-numerics": {
-            "path": "../Packages/swift-numerics/"
+        "local-darwin-foundationplus": {
+            "path": "../Packages/darwin-foundationplus/"
         },
         "local-darwin-keychainaccess": {
             "path": "../Packages/darwin-keychainaccess/"
         },
         "local-darwin-logger": {
             "path": "../Packages/darwin-logger/"
+        },
+        "local-darwin-relux": {
+            "path": "../Packages/darwin-relux/"
         },
         "local-darwin-rerdux": {
             "path": "../Packages/darwin-relux/"
@@ -79,6 +58,12 @@
         "local-Pow": {
             "path": "../Packages/Pow/"
         },
+        "local-relux-analytics": {
+            "path": "../Packages/relux-analytics/"
+        },
+        "local-relux-connectionmonitor": {
+            "path": "../Packages/relux-connectionmonitor/"
+        },
         "local-swift": {
             "path": "../Packages/swift/"
         },
@@ -88,93 +73,99 @@
         "local-swift-argument-parser": {
             "path": "../Packages/swift-argument-parser/"
         },
+        "local-swift-async-algorithms": {
+            "path": "../Packages/swift-async-algorithms/"
+        },
         "local-swift-collections": {
             "path": "../Packages/swift-collections/"
+        },
+        "local-swift-docc-symbolkit": {
+            "path": "../Packages/swift-docc-symbolkit/"
+        },
+        "local-swift-ios-featuremanagement": {
+            "path": "../Packages/ios-featuremanagement/"
+        },
+        "local-swift-numerics": {
+            "path": "../Packages/swift-numerics/"
+        },
+        "local-swift-stdlibplus": {
+            "path": "../Packages/swift-stdlibplus/"
+        },
+        "local-swift-swift-docc-plugin": {
+            "path": "../Packages/swift-docc-plugin/"
         },
         "local-swift-swinject": {
             "path": "../Packages/swift-swinject/"
         },
-        "local-darwin-foundationplus": {
-            "path": "../Packages/darwin-foundationplus/"
+        "local-swiftui-relux": {
+            "path": "../Packages/swiftui-relux/"
         },
         "local-swiftui-reluxrouter": {
             "path": "../Packages/swiftui-reluxrouter/"
+        },
+        "remote-darwin-foundationplus": {
+            "version": "2.5.0",
+            "url": "git@github.com:ivalx1s/darwin-foundationplus.git"
         },
         "remote-darwin-keychainaccess": {
             "version": "4.2.3",
             "url": "git@github.com:ivalx1s/darwin-keychainaccess.git"
         },
-        "remote-darwin-relux": {
-            "url": "git@github.com:ivalx1s/darwin-relux.git",
-            "version": "7.0.0"
-        },
         "remote-darwin-logger": {
             "url": "git@github.com:ivalx1s/darwin-logger.git",
-            "version": "1.0.0"
-        },
-        "remote-swiftui-reluxrouter": {
-            "url": "git@github.com:ivalx1s/swiftui-reluxrouter.git",
-            "version": "2.0.0"
+            "version": "1.1.0"
         },
         "remote-darwin-restclient": {
-            "version": "0.4.0",
+            "version": "3.2.0",
             "url": "git@github.com:ivalx1s/darwin-restclient.git"
         },
         "remote-hapticshelper-ios": {
             "version": "0.1.0",
             "url": "git@github.com:ivalx1s/hapticshelper-ios.git"
         },
+        "remote-ios-featuremanagement": {
+            "version": "3.1.0",
+            "url": "git@github.com:ivalx1s/ios-featuremanagement.git"
+        },
         "remote-lottie-ios": {
-            "version": "4.4.3",
+            "version": "4.5.0",
             "url": "git@github.com:airbnb/lottie-ios.git"
         },
         "remote-Pow": {
-            "version": "1.0.1",
+            "version": "1.0.5",
             "url": "git@github.com:EmergeTools/Pow.git"
+        },
+        "remote-relux-analytics": {
+            "version": "1.0.0",
+            "url": "git@github.com:ivalx1s/relux-analytics.git"
+        },
+        "remote-relux-connectionmonitor": {
+            "version": "1.0.0",
+            "url": "git@github.com:ivalx1s/relux-connectionmonitor.git"
         },
         "remote-swift-algorithms": {
             "version": "1.2.0",
             "url": "git@github.com:apple/swift-algorithms.git"
         },
+        "remote-swift-async-algorithms": {
+            "version": "1.0.0",
+            "url": "git@github.com:apple/swift-async-algorithms.git"
+        },
         "remote-swift-collections": {
             "url": "https://github.com/apple/swift-collections.git",
-            "version": "1.1.1"
+            "version": "1.1.4"
         },
         "remote-swift-stdlibplus": {
-            "version": "1.0.0",
+            "version": "1.2.2",
             "url": "git@github.com:ivalx1s/swift-stdlibplus.git"
         },
         "remote-swift-swinject": {
             "version": "3.0.0",
             "url": "https://github.com/eatml/swift-swinject.git"
         },
-        "remote-darwin-foundationplus": {
-            "version": "2.0.0",
-            "url": "git@github.com:ivalx1s/darwin-foundationplus.git"
-        },
-        "remote-ios-featuremanagement": {
-            "version": "2.0.0",
-            "url": "git@github.com:ivalx1s/ios-featuremanagement.git"
-        },
-        "remote-relux-connectionmonitor": {
-            "version": "1.0.0",
-            "url": "git@github.com:ivalx1s/relux-connectionmonitor.git"
-        },
-        "remote-swift-async-algorithms": {
-            "version": "1.0.0",
-            "url": "git@github.com:apple/swift-async-algorithms.git"
-        },
         "remote-swiftui-relux": {
-            "version": "0.0.3",
+            "version": "0.0.8",
             "url": "git@github.com:ivalx1s/swiftui-relux.git"
-        },
-        "remote-relux-analytics": {
-            "version": "1.0.0",
-            "url": "git@github.com:ivalx1s/relux-analytics.git"
-        },
-        "remote-relux-analytics-amplitude": {
-            "version": "1.0.0",
-            "url": "git@github.com:ivalx1s/relux-analytics-amplitude.git"
         }
     },
   "schemes": {
@@ -442,10 +433,6 @@
             },
             "dependencies": [
                 {
-                    "package": "remote-relux-analytics-amplitude",
-                    "product": "ReluxAnalyticsAmplitude"
-                },
-                {
                     "package": "remote-relux-analytics",
                     "product": "ReluxAnalytics"
                 },
@@ -458,7 +445,7 @@
                     "product": "Logger"
                 },
                 {
-                    "package": "remote-swiftui-reluxrouter",
+                    "package": "local-swiftui-reluxrouter",
                     "product": "ReluxRouter"
                 },
                 {
@@ -504,15 +491,19 @@
                 },
                 {
                     "package": "remote-darwin-restclient",
-                    "product": "RestClient"
+                    "product": "HttpClient"
                 },
                 {
                     "package": "remote-darwin-keychainaccess",
                     "product": "KeychainAccess"
                 },
                 {
-                    "package": "remote-darwin-relux",
+                    "package": "local-darwin-relux",
                     "product": "Relux"
+                },
+                {
+                    "package": "local-swiftui-relux",
+                    "product": "SwiftUIRelux"
                 },
                 {
                     "package": "remote-swift-swinject",

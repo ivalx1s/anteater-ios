@@ -1,6 +1,5 @@
 import Swinject
 import ReluxAnalytics
-import ReluxAnalyticsAmplitude
 import Foundation
 
 fileprivate final class AmplitudeLicenseKeyStore: Analytics.LicenseKeyProviding {
@@ -18,16 +17,12 @@ extension Analytics: IoC.Registry.Module {
         
         container.register((any Analytics.IAnalyticsService).self) { resolver -> (any Analytics.IAnalyticsService) in
             var aggregators = [any Analytics.IAnalyticsAggregator]()
-//            #if !DEBUG // disable analytics in debug builds
-            let amplitudeAggregator = Analytics.AmplitudeAggregator(
-                licenseKeyProvider: AmplitudeLicenseKeyStore()
-            )
-//            let appsflyerAggregator = Analytics.AmplitudeAggregator(
-//                licenseKeyProvider:  resolver.resolve(Analytics.AppsflyerLicenseKeyProvider.self)!
-//            )
-            aggregators.append(amplitudeAggregator)
-//            aggregators.append(appsflyerAggregator)
-//            #endif
+            #if !DEBUG // disable analytics in debug builds
+            // let amplitudeAggregator = ...
+            // let appsflyerAggregator = ...
+            aggregators.append(/*amplitudeAggregator*/)
+            aggregators.append(/*appsflyerAggregator*/)
+            #endif
             return Analytics.AnalyticsService(
                 aggregators: aggregators
             )
