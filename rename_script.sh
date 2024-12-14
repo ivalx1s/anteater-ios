@@ -11,11 +11,12 @@
 #    to use `new_word` and `new_word_lower` respectively.
 # 2. Modifies file contents to replace all occurrences of `old_word` and `old_word_lower`.
 # 3. Attempts to rename the current working directory if it contains `old_word` or `old_word_lower`.
-# 4. The script is self-deleting after completion.
+# 4. The script is self-deleting after completion by default.
 # 5. An optional `-v` or `--verbose` flag can be specified to see detailed output.
+# 6. An optional `--no-delete` flag can be specified to prevent self-deletion.
 #
 # Usage:
-#   ./rename_script.sh [-v|--verbose] old_word new_word
+#   ./rename_script.sh [--no-delete] [-v|--verbose] old_word new_word
 #
 # Example:
 #   ./rename_script.sh Shopmate Shopbro
@@ -26,6 +27,7 @@
 set -euo pipefail
 
 verbose=false
+auto_delete=true
 script_filename=$(basename "$0")
 
 # Parse arguments
@@ -35,13 +37,17 @@ while [[ $# -gt 0 ]]; do
             verbose=true
             shift
             ;;
+        --no-delete)
+            auto_delete=false
+            shift
+            ;;
         *)
             if [ -z "${old_word:-}" ]; then
                 old_word="$1"
             elif [ -z "${new_word:-}" ]; then
                 new_word="$1"
             else
-                echo "Usage: $0 [-v|--verbose] old_word new_word"
+                echo "Usage: $0 [--no-delete] [-v|--verbose] old_word new_word"
                 exit 1
             fi
             shift
@@ -51,7 +57,7 @@ done
 
 # Validate arguments
 if [ -z "${old_word:-}" ] || [ -z "${new_word:-}" ]; then
-    echo "Usage: $0 [-v|--verbose] old_word new_word"
+    echo "Usage: $0 [--no-delete] [-v|--verbose] old_word new_word"
     exit 1
 fi
 
@@ -152,11 +158,11 @@ if [ "$current_dir_basename" != "$new_dir_name" ]; then
     cd "$new_dir_name"
 fi
 
-# --- Step 5: Self-delete ---
-# Now we are in the renamed directory (or same directory if no rename happened),
-# and the script filename is still $script_filename.
-if [ -f "$script_filename" ]; then
-    rm -- "$script_filename"
-else
-    $verbose && echo "Script file $script_filename not found for deletion."
+# --- Step 5: Self-delete (if auto_delete is true) ---
+if $auto_delete; then
+    if [ -f "$script_filename" ]; then
+        rm -- "$script_filename"
+    else
+        $verbose && echo "Script file $script_filename not found for deletion."
+    fi
 fi
